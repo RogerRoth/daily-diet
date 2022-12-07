@@ -8,6 +8,7 @@ import { Loading } from '@components/Loading';
 import theme from './src/theme';
 import { AboutMeals } from '@screens/AboutMeals';
 import { NewMeal } from '@screens/NewMeal';
+import { MealCreated } from '@screens/MealCreated';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -19,7 +20,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      { fontsLoaded ? <NewMeal /> : <Loading /> }
+      { fontsLoaded ? <MealCreated /> : <Loading /> }
     </ThemeProvider>
   );
 }

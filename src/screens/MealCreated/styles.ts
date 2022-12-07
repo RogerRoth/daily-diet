@@ -3,32 +3,37 @@ import styled, { css } from 'styled-components/native';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_500};
-`;
-
-export const Form = styled.View`
-  flex: 1;
-
-  padding: 40px 24px 24px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-`;
-
-export const RowContainer = styled.View`
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Title = styled.Text`
+  text-align: center;
   margin-bottom: 8px;
+
   ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.XL}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
+    color: ${theme.COLORS.GRAY_100};
+  `}
+`;
+
+export const Subtitle = styled.Text`
+  text-align: center;
+
+  ${({ theme }) => css`
     font-size: ${theme.FONT_SIZE.SM}px;
+    font-family: ${theme.FONT_FAMILY.REGULAR};
     color: ${theme.COLORS.GRAY_200};
   `}
 `;
 
-export const Submit = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-`;
+export const Image = styled.Image`
+  padding-left: 75px;
+  padding-right: 75px;
+
+  margin-top: 40px;
+
+  margin-bottom: 32px;
+`

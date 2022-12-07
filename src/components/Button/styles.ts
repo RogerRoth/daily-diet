@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity, Text } from "react-native";
-import { Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons';
 
 export type ButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 
@@ -14,6 +14,8 @@ export const Container = styled(TouchableOpacity)<Props>`
 
   min-height: 50px;
   max-height: 50px;
+
+  padding: 0 24px;
 
   justify-content: center;
   align-items: center;
