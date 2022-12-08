@@ -4,7 +4,7 @@ import styled, { css } from "styled-components/native";
 export type ChooseInDietProps = {
   isActive?: boolean;
   type?: 'PRIMARY' | 'SECONDARY';
-}
+};
 
 export const Container = styled(TouchableOpacity)<ChooseInDietProps>`
   ${({ theme, isActive, type }) => isActive && css`

@@ -5,7 +5,7 @@ export type MealItemProps = TouchableOpacityProps & {
   hour: string;
   description: string;
   isInsideOfDiet: boolean;
-}
+};
 
 export function MealItem({ hour, description, isInsideOfDiet = true, ...rest }: MealItemProps){
   return(
@@ -20,4 +20,4 @@ export function MealItem({ hour, description, isInsideOfDiet = true, ...rest }: 
       <InsideOfDiet isInsideOfDiet={isInsideOfDiet}/>
     </Container>
   )
-}
+};

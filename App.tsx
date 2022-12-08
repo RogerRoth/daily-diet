@@ -2,13 +2,12 @@ import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans';
 
-import { Home } from '@screens/Home';
 import { Loading } from '@components/Loading';
+import { Routes } from './src/routes';
+
+import { Home } from '@screens/Home';
 
 import theme from './src/theme';
-import { AboutMeals } from '@screens/AboutMeals';
-import { NewMeal } from '@screens/NewMeal';
-import { MealCreated } from '@screens/MealCreated';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -20,7 +19,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      { fontsLoaded ? <MealCreated /> : <Loading /> }
+      { fontsLoaded ? <Home /> : <Loading /> }
     </ThemeProvider>
   );
 }

@@ -4,7 +4,7 @@ import { Container, StatisticsInfoTypeStyleProps, StatisticsInfoTypeStyleSizePro
 type Props = ViewProps & {
   type: StatisticsInfoTypeStyleProps;
   size?: StatisticsInfoTypeStyleSizeProps;
-}
+};
 
 export function StatisticsInfo({ type, size = 'SM', children, ...rest }: Props) {
   return(
@@ -12,4 +12,4 @@ export function StatisticsInfo({ type, size = 'SM', children, ...rest }: Props) 
       {children}
     </Container>
   )
-}
+};

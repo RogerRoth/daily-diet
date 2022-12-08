@@ -1,11 +1,10 @@
-import { ImageSourcePropType } from 'react-native';
 import { Container, Logo, UserImage } from "./styles";
 
 import logoImg from '@assets/logo.png';
 
 type Props = {
   userImageUrl: string;
-}
+};
 
 export function HomeHeader({ userImageUrl }: Props) {
   return (
@@ -14,4 +13,4 @@ export function HomeHeader({ userImageUrl }: Props) {
       <UserImage source={{ uri: userImageUrl }} />
     </Container>
   )
-}
+};

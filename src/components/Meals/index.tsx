@@ -5,11 +5,11 @@ import { MealItem, MealItemProps } from "@components/MealItem";
 export type MealsProps = {
   title: string;
   data: MealItemProps[];
-}
+};
 
 type Props = MealsProps & {
   onEnter: ( itemDescription:string ) => void;
-}
+};
 
 export function Meals({ title, data, onEnter }: Props){
   return(
@@ -33,4 +33,4 @@ export function Meals({ title, data, onEnter }: Props){
       />
     </Container>
   )
-}
+};

@@ -1,19 +1,28 @@
 import { Container, Title, Subtitle, Image } from "./styles";
 
 import happyImg from '@assets/happy.png';
+import sadImg from '@assets/sad.png';
 import { Button } from "@components/Button";
 
-export function MealCreated(){
+type RouteParams = {
+  title: string;
+  subtitlePartA: string;
+  subtitlePartB: string;
+  subtitlePartBold: string;
+  isInsideDiet: boolean;
+}
+
+export function MealCreated({title, isInsideDiet, subtitlePartA, subtitlePartB, subtitlePartBold}: RouteParams){
   return(
     <Container>
-      <Title >
-        Continue assim!
+      <Title isInsideDiet={isInsideDiet}>
+        {title}
       </Title>
       <Subtitle>
-        Você continua dentro da dieta. Muito bem!
+        {subtitlePartA}<Subtitle style={{ fontWeight: 'bold'}}>{subtitlePartBold}</Subtitle>{subtitlePartB}
       </Subtitle>
 
-      <Image source={happyImg}/>
+      <Image source={isInsideDiet ? happyImg : sadImg}/>
 
       <Button title="Ir para a página inicial"/>
     </Container>

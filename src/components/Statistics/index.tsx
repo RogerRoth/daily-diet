@@ -5,7 +5,7 @@ type Props = {
   title: string;
   subtitle: string;
   type?: StatisticsTypeStyleProps;
-}
+};
 
 export function Statistics({ type='PRIMARY', subtitle, title}: Props){
   return(
@@ -18,4 +18,4 @@ export function Statistics({ type='PRIMARY', subtitle, title}: Props){
       <StatisticsText title={title} subtitle={subtitle}/>
     </Container>
   )
-}
+};

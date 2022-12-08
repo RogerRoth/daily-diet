@@ -3,7 +3,7 @@ import { Container, Icon, Title, ChooseInDietProps } from "./styles";
 
 type Props = TouchableOpacityProps & ChooseInDietProps & {
   title: string;
-}
+};
 
 export function ChooseInDiet({ title, type='PRIMARY', isActive=false, ...rest }: Props){
   return (
@@ -19,5 +19,4 @@ export function ChooseInDiet({ title, type='PRIMARY', isActive=false, ...rest }:
       </Title>
     </Container>
   )
-
-}
+};

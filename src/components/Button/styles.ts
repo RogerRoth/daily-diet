@@ -6,7 +6,7 @@ export type ButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 
 type Props = {
   type: ButtonTypeStyleProps;
-}
+};
 
 export const Container = styled(TouchableOpacity)<Props>`
   flex: 1;

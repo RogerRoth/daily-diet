@@ -6,7 +6,7 @@ export type InputSizeStyleProps = 'MD' | 'LG';
 
 type Props = {
   size: InputSizeStyleProps;
-}
+};
 
 export const Container = styled(View)<Props>`
   flex: 1;

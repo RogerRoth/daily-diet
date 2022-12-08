@@ -1,5 +1,10 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native';
 import styled, { css } from 'styled-components/native';
+
+export type MealCreatedStyleProps = {
+  isInsideDiet: boolean;
+}
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
@@ -8,14 +13,14 @@ export const Container = styled(SafeAreaView)`
   justify-content: center;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Text)<MealCreatedStyleProps>`
   text-align: center;
   margin-bottom: 8px;
 
-  ${({ theme }) => css`
+  ${({ theme, isInsideDiet }) => css`
     font-size: ${theme.FONT_SIZE.XL}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
-    color: ${theme.COLORS.GRAY_100};
+    color: ${isInsideDiet ? theme.COLORS.GREEN_700 : theme.COLORS.RED_700};
   `}
 `;
 

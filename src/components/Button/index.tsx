@@ -20,4 +20,4 @@ export function Button({ title, type='PRIMARY', icon, ...rest }: Props) {
       </Title>
     </Container>
   )
-}
+};

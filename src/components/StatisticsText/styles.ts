@@ -4,7 +4,7 @@ export type StatisticsTextTypeStyleProps = 'XL' | 'XXL';
 
 type Props = {
   size: StatisticsTextTypeStyleProps
-}
+};
 
 export const Container = styled.View`
   width: 100%;

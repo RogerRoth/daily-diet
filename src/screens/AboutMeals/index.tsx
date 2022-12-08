@@ -3,11 +3,7 @@ import { StatisticsInfo } from "@components/StatisticsInfo";
 import { StatisticsText } from "@components/StatisticsText";
 import { Container, Body, Title, StatisticsSmall, AboutMealTypeStyleProps } from "./styles";
 
-type Props = {
-  type: AboutMealTypeStyleProps;
-}
-
-export function AboutMeals({ type }: Props){
+export function AboutMeals(){
   return( 
     <Container type="PRIMARY">
       <Header type="PRIMARY" size="MD"> 

@@ -4,7 +4,7 @@ type Props = {
   title: string;
   subtitle: string;
   size?: StatisticsTextTypeStyleProps;
-}
+};
 
 export function StatisticsText({ title, subtitle, size = 'XXL' }: Props) {
   return (
@@ -18,4 +18,4 @@ export function StatisticsText({ title, subtitle, size = 'XXL' }: Props) {
     </Container>
 
   )
-}
+};

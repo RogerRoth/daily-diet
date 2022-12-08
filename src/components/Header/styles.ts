@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { ArrowLeft } from 'phosphor-react-native'
+import { ArrowLeft } from 'phosphor-react-native';
 
 export type HeaderTypeStyleProps = 'PRIMARY' | 'SECONDARY' | 'TERTIARY';
 
@@ -8,7 +8,7 @@ export type HeaderTypeStyleSizeProps = 'SM' | 'MD';
 type Props = {
   type: HeaderTypeStyleProps;
   size: HeaderTypeStyleSizeProps;
-}
+};
 
 export const Container = styled.View<Props>`
   width: 100%;

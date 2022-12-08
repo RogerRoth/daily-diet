@@ -6,7 +6,7 @@ type Props = TextInputProps & TextProps & {
   label: string;
   size?: InputSizeStyleProps;
   inputRef?: React.RefObject<TextInput>;
-}
+};
 
 export function Input({ label, size = 'MD', inputRef, ...rest }: Props){
   return(
@@ -18,4 +18,4 @@ export function Input({ label, size = 'MD', inputRef, ...rest }: Props){
       <InputCustom size={size} ref={inputRef} {...rest}/>
     </Container>
   )
-}
+};

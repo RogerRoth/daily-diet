@@ -3,7 +3,7 @@ import styled, { css } from "styled-components/native";
 
 export type MealItemStyleProps = {
   isInsideOfDiet: boolean;
-} 
+};
 
 export const Container = styled.TouchableOpacity`
   width: 100%;
