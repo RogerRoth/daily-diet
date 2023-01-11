@@ -21,6 +21,7 @@ export function Home(){
   const [statisticsType, setStatisticsType] = useState<StatisticsType>('PRIMARY');
 
   const [mealsTotalCount, setMealsTotalCount] = useState<number>(0);
+  const [mealsInDietCount, setMealsInDietCount] = useState<number>(0);
   const [mealsOutDietCount, setMealsOutDietCount] = useState<number>(0);
   const [mealsBestSequence, setMealsBestSequence] = useState<number>(0);
 
@@ -44,17 +45,17 @@ export function Home(){
   async function fetchMeals(){
     try {
       setIsLoading(true);
-
+      
       const data = await mealsGetAll();
-
-      if (data.length === 0){
-        setMeals(MEALS_SAMPLE);
+      
+      if (data.length > 0){
+        setMeals(data);
         let mealsTotalCount = 0
         let mealsOutDietCount = 0
         let mealsSequence = 0
         let mealsBestSequence = 0
 
-        MEALS_SAMPLE.map( item => {
+        data.map( item => {
           mealsTotalCount += item.data.length;
           const mealsOutDiet = item.data.filter( meal => meal.isInsideOfDiet === false);
 
@@ -84,8 +85,10 @@ export function Home(){
         })
 
         const mealsInsideDiet =  100 - ((mealsOutDietCount / mealsTotalCount) * 100);
+        const mealsIn = mealsTotalCount - mealsOutDietCount;
 
         setMealsTotalCount(mealsTotalCount);
+        setMealsInDietCount(mealsIn);
         setMealsOutDietCount(mealsOutDietCount);
         setMealsBestSequence(mealsBestSequence);
 
@@ -97,8 +100,6 @@ export function Home(){
 
         setMealsPercentage(`${mealsInsideDiet.toFixed(2)}%`)
 
-      } else {
-        setMeals(data);
       }
 
     } catch (error) {
@@ -107,6 +108,17 @@ export function Home(){
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleAboutMeals(){
+    navigation.navigate('aboutMeals', {
+      mealsPercentage,
+      statisticsType,
+      mealsBestSequence,
+      mealsTotalCount,
+      mealsInDietCount,
+      mealsOutDietCount,
+    })
   }
 
   useFocusEffect(
@@ -119,7 +131,12 @@ export function Home(){
     <Container>
       <HomeHeader userImageUrl='https://github.com/RogerRoth.png'/>
 
-      <Statistics title={mealsPercentage} subtitle="das refeições dentro da dieta" type={statisticsType}/>
+      <Statistics 
+      title={mealsPercentage} 
+      subtitle="das refeições dentro da dieta" 
+      type={statisticsType}
+      onEnter={handleAboutMeals}
+      />
 
       <Title>
         Refeições
