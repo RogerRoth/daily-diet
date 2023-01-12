@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Alert, FlatList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { MEALS_SAMPLE } from '@utils/Meals'
+
+import { AppError } from "@utils/AppError";
 
 import { mealsGetAll } from '@storage/meal/mealsGetAll';
 
@@ -11,9 +12,9 @@ import { Meals, MealsProps } from "@components/Meals";
 import { MealItemProps } from "@components/MealItem";
 import { Statistics, StatisticsType } from "@components/Statistics";
 import { Loading } from '@components/Loading';
+import { ListEmpty } from '@components/ListEmpty';
 
 import { Container, Title } from "./styles";
-import { ListEmpty } from '@components/ListEmpty';
 
 export function Home(){
   const [isLoading, setIsLoading] = useState(true);
@@ -48,63 +49,69 @@ export function Home(){
       
       const data = await mealsGetAll();
       
-      if (data.length > 0){
-        setMeals(data);
-        let mealsTotalCount = 0
-        let mealsOutDietCount = 0
-        let mealsSequence = 0
-        let mealsBestSequence = 0
+      
+      setMeals(data);
+      let mealsTotalCount = 0
+      let mealsOutDietCount = 0
+      let mealsSequence = 0
+      let mealsBestSequence = 0
 
-        data.map( item => {
-          mealsTotalCount += item.data.length;
-          const mealsOutDiet = item.data.filter( meal => meal.isInsideOfDiet === false);
+      data.map( item => {
+        mealsTotalCount += item.data.length;
+        const mealsOutDiet = item.data.filter( meal => meal.isInsideOfDiet === false);
 
-          mealsOutDietCount += mealsOutDiet.length;
+        mealsOutDietCount += mealsOutDiet.length;
 
-          let lastMeal = true
+        let lastMeal = true
 
-          item.data.map( meal => {
-            if(meal.isInsideOfDiet === true && lastMeal === false) {
-              mealsSequence++
-            }
+        item.data.map( meal => {
+          if(meal.isInsideOfDiet === true && lastMeal === false) {
+            mealsSequence++
+          }
 
-            if(meal.isInsideOfDiet === true && lastMeal === true) {
-              mealsSequence++
-            } 
-            
-            if(meal.isInsideOfDiet === false) {
-              mealsSequence = 0
-            }
-            lastMeal = meal.isInsideOfDiet
-            
-            if(mealsSequence > mealsBestSequence){
-              mealsBestSequence = mealsSequence
-            }
+          if(meal.isInsideOfDiet === true && lastMeal === true) {
+            mealsSequence++
+          } 
+          
+          if(meal.isInsideOfDiet === false) {
+            mealsSequence = 0
+          }
+          lastMeal = meal.isInsideOfDiet
+          
+          if(mealsSequence > mealsBestSequence){
+            mealsBestSequence = mealsSequence
+          }
 
-          })
         })
+      })
 
-        const mealsInsideDiet =  100 - ((mealsOutDietCount / mealsTotalCount) * 100);
-        const mealsIn = mealsTotalCount - mealsOutDietCount;
+      const mealsInsideDiet = data.length > 0 ? 100 - ((mealsOutDietCount / mealsTotalCount) * 100) : 0;
+      const mealsIn = mealsTotalCount - mealsOutDietCount;
 
-        setMealsTotalCount(mealsTotalCount);
-        setMealsInDietCount(mealsIn);
-        setMealsOutDietCount(mealsOutDietCount);
-        setMealsBestSequence(mealsBestSequence);
+      setMealsTotalCount(mealsTotalCount);
+      setMealsInDietCount(mealsIn);
+      setMealsOutDietCount(mealsOutDietCount);
+      setMealsBestSequence(mealsBestSequence);
 
-        if(mealsInsideDiet <= 75){
-          setStatisticsType('SECONDARY')
-        } else {
-          setStatisticsType('PRIMARY')
-        }
-
-        setMealsPercentage(`${mealsInsideDiet.toFixed(2)}%`)
-
+      if(mealsInsideDiet <= 75){
+        setStatisticsType('SECONDARY')
+      } else {
+        setStatisticsType('PRIMARY')
       }
 
+      if (data.length === 0){
+        setStatisticsType('PRIMARY')
+      }
+
+      setMealsPercentage(`${mealsInsideDiet.toFixed(2)}%`)
     } catch (error) {
-      console.log(error)
-      Alert.alert('Refeições', 'Não foi possível carregar as refeições.')
+      if(error instanceof AppError){
+        Alert.alert('Refeições', error.message)
+
+      }else{
+        Alert.alert('Refeições', 'Não foi possível carregar as refeições.')
+        console.log(error)
+      }
     } finally {
       setIsLoading(false);
     }

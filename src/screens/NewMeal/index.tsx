@@ -1,6 +1,8 @@
-import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { Alert, KeyboardAvoidingView, ScrollView } from "react-native";
 import { Container, Form, RowContainer, Title, Submit } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+
+import { AppError } from "@utils/AppError";
 
 import { mealCreate } from "@storage/meal/mealCreate"
 
@@ -19,18 +21,30 @@ export function NewMeal(){
 
   const navigation = useNavigation();
 
-  function handleCreateMeal() {
-    mealCreate({
-      title: mealDate,
-      data: [{
-        meal: mealName,
-        hour: mealHour,
-        isInsideOfDiet: isInsideDiet,
-        description: mealDescription
-      }]
-    })
+  async function handleCreateMeal() {
+    try {
+      await mealCreate({
+        title: mealDate,
+        data: [{
+          meal: mealName,
+          hour: mealHour,
+          isInsideOfDiet: isInsideDiet,
+          description: mealDescription
+        }]
+      })
+  
+      navigation.navigate('mealCreated', {isInsideDiet})
 
-    navigation.navigate('mealCreated', {isInsideDiet})
+    } catch (error) {
+      if(error instanceof AppError){
+        Alert.alert('Nova Refeição', error.message)
+
+      }else{
+        Alert.alert('Nova Refeição', 'Não foi possível criar uma nova refeição.')
+        console.log(error)
+      }
+    }
+    
   }
 
   return(
